@@ -31,9 +31,6 @@ var domCache = {
                     return function() {
                         if(typeof domElement == 'undefined') {
                             domElement = selectorFunction(selectors[key]);
-                            console.dir('Object for "' + selectors[key] + '" created.');
-                        } else {
-                            console.dir('Object for "' + selectors[key] + '" returned from cache.');
                         }
                         return(domElement);
                     };
