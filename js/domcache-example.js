@@ -1,28 +1,34 @@
-/**
-* domCache is a caching function for dom elements.
-* It is initialized with a set of selectors, passed as an object.
-* After calling the setup function, for each selector a function is available.
-* When one of the functions is called, the object is either created or the cached
-* object is returned. An example can be found below the function.
-**/
-
 $(document).ready(function() {
+
     /**
-    * Object with selector strings
+    * BAD EXAMPLE WITH A TYPICAL jQuery EVENT HANDLER
+    * Problem: the '#p-second' is queried anytime the headline is clicked.
+    * Though, this is in most cases not necessary. Querying it after the first click
+    * and then caching it is sufficient.
     **/
+    
+    $('h1#headline').click(function() {
+        $('#p-second').html('I just changed.');
+    });
+    
+    /**
+    * SAME EXAMPLE WITH domCache
+    * It helps you to remove selector strings from you code and put them in a single
+    * object. Moreover, the dom objects are created when first accessed and on all subsequent
+    * requests returned from cache.
+    **/
+    
+    // Selectors needed during program runtime
     var selectors = {
         headline:    'h1#headline',
-        pSecond:     '#p-second',
-        third:       '#p-third'
+        pSecond:     '#p-second'
     }
+
     // Initialize domCache
     domCache.setup(selectors);
+    domCache.headline().click(function() {
+        domCache.pSecond().html('I just changed');
+    })
+    
 
-    // All functions have been created now. Time to use them!
-    domCache.headline(); // create and return
-    domCache.headline(); // return
-    domCache.pSecond(); // create and return
-    domCache.pSecond(); // return
-    domCache.headline().html('The text just changed.');
 });
-
