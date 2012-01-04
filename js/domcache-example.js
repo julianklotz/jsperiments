@@ -1,3 +1,5 @@
+var dc;
+
 $(document).ready(function() {
 
   /**
@@ -6,7 +8,7 @@ $(document).ready(function() {
   * Though, this is in most cases not necessary. Querying it after the first click
   * and then caching it is sufficient.
   **/
-  console.dir('badexample');
+  console.log('Test case: Assign a click handler to a DOM element 10.000 times. How long does it take?');
   var time = Date.now();
   for(var i = 0; i < 10000; i++) {
     $('h1#headline').click(function() {
@@ -14,7 +16,7 @@ $(document).ready(function() {
     });
   }
   var diff = Date.now() - time;
-  console.dir(diff);
+  console.log('Without domCache: ' + diff + "ms");
   
   /**
   * SAME EXAMPLE WITH domCache
@@ -26,17 +28,20 @@ $(document).ready(function() {
   // Selectors needed during program runtime
   var selectors = {
     headline:  'h1#headline',
-    pSecond:   '#p-second'
+    pSecond:   '#p-second',
+    'asd asd ': '#id'
   }
 
   // Initialize domCache
-  domCache.setup(selectors);
+  dc = Object.create(domCache);
+  dc.setup(selectors, jQuery, false);
   time = Date.now();
   for(var i = 0; i < 10000; i++) {
-    domCache.headline().click(function() {
-      domCache.pSecond().html('I just changed');
+    dc.headline().click(function() {
+      dc.pSecond().html('I just changed');
     })
   }
   diff = Date.now() - time;
-  console.dir(diff);
+  console.log('With domCache: ' + diff + "ms");
+  console.log('If you want to find out how to use domCache in your code, take a look at js/domcache-example.js');
 });
