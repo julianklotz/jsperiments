@@ -34,8 +34,10 @@ $(document).ready(function() {
 
   // Initialize domCache
   dc = Object.create(domCache);
-  dc.setup(selectors, jQuery, false);
+  dc.setup(selectors);
+
   time = Date.now();
+  
   for(var i = 0; i < 10000; i++) {
     dc.headline().click(function() {
       dc.pSecond().html('I just changed');
