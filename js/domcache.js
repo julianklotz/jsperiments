@@ -1,12 +1,11 @@
-/**
-* domcache helps you separate selectors from code and handles caching for you.
-*
-* Copyright 2011, 2015 Julian Klotz
-* Version 1.1
-* Date 2015-01-21
-* Released under the MIT License.
-**/
-
+/*!
+ * domCache JavaScript library v1.1
+ *
+ * domCache helps you separate selectors from code and handles caching for you.
+ * Copyright 2011, 2015 Julian Klotz
+ * Date 2015-01-21
+ * Released under the MIT License.
+ */
 
 (function () {
 	/**
